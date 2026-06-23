@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AlmacenesPorAhiMaui.Views.LoginPage"
+             BackgroundColor="#101826"
+             Title="Login">
+    <Grid Padding="36">
+        <Border StrokeThickness="0" BackgroundColor="#172235" StrokeShape="RoundRectangle 28" Padding="32" WidthRequest="460" HorizontalOptions="Center" VerticalOptions="Center">
+            <VerticalStackLayout Spacing="18">
+                <Label Text="Almacenes Por Ahí" FontSize="34" FontAttributes="Bold" />
+                <Label Text="Sistema móvil de inventario, ventas y devoluciones" TextColor="#A9B7CC" FontSize="16" />
+                <Entry Placeholder="Usuario" Text="{Binding Usuario}" />
+                <Entry Placeholder="Contraseña" IsPassword="True" Text="{Binding Password}" />
+                <Button Text="Ingresar" Command="{Binding IngresarCommand}" HeightRequest="52" />
+                <Label Text="{Binding Mensaje}" TextColor="#35D0BA" />
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+</ContentPage>
