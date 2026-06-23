@@ -5,139 +5,189 @@
              BackgroundColor="#101826"
              Title="Panel">
     <ScrollView>
-        <VerticalStackLayout Padding="24" Spacing="20">
-            <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
-                <VerticalStackLayout>
-                    <Label Text="Panel de Gestión" FontSize="34" FontAttributes="Bold" />
-                    <Label Text="Inventario, clientes, ventas, pedidos y devoluciones con MVVM + listas observables" TextColor="#A9B7CC" />
-                </VerticalStackLayout>
-                <Button Grid.Column="1" Text="Generar informe" Command="{Binding GenerarInformeCommand}" WidthRequest="180" />
-            </Grid>
+        <VerticalStackLayout Padding="16" Spacing="18">
 
-            <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="14">
-                <Border BackgroundColor="#172235" StrokeThickness="0" StrokeShape="RoundRectangle 22" Padding="18"><VerticalStackLayout><Label Text="Stock" TextColor="#A9B7CC"/><Label Text="{Binding TotalStock}" FontSize="28" FontAttributes="Bold"/></VerticalStackLayout></Border>
-                <Border Grid.Column="1" BackgroundColor="#172235" StrokeThickness="0" StrokeShape="RoundRectangle 22" Padding="18"><VerticalStackLayout><Label Text="Ventas" TextColor="#A9B7CC"/><Label Text="{Binding TotalVentas}" FontSize="28" FontAttributes="Bold"/></VerticalStackLayout></Border>
-                <Border Grid.Column="2" BackgroundColor="#172235" StrokeThickness="0" StrokeShape="RoundRectangle 22" Padding="18"><VerticalStackLayout><Label Text="Devoluciones" TextColor="#A9B7CC"/><Label Text="{Binding TotalDevoluciones}" FontSize="28" FontAttributes="Bold"/></VerticalStackLayout></Border>
-                <Border Grid.Column="3" BackgroundColor="#172235" StrokeThickness="0" StrokeShape="RoundRectangle 22" Padding="18"><VerticalStackLayout><Label Text="Clientes" TextColor="#A9B7CC"/><Label Text="{Binding TotalClientes}" FontSize="28" FontAttributes="Bold"/></VerticalStackLayout></Border>
-            </Grid>
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Panel de Gestión"
+                       FontSize="30"
+                       FontAttributes="Bold"
+                       TextColor="White" />
+                <Label Text="Inventario, clientes, ventas, pedidos y devoluciones con MVVM + listas observables"
+                       TextColor="#A9B7CC"
+                       FontSize="14" />
+                <Button Text="Generar informe"
+                        Command="{Binding GenerarInformeCommand}" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="12">
+                <Border BackgroundColor="#172235" StrokeThickness="0" StrokeShape="RoundRectangle 22" Padding="18">
+                    <VerticalStackLayout>
+                        <Label Text="Stock" TextColor="#A9B7CC" />
+                        <Label Text="{Binding TotalStock}" FontSize="28" FontAttributes="Bold" TextColor="White" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border BackgroundColor="#172235" StrokeThickness="0" StrokeShape="RoundRectangle 22" Padding="18">
+                    <VerticalStackLayout>
+                        <Label Text="Ventas" TextColor="#A9B7CC" />
+                        <Label Text="{Binding TotalVentas}" FontSize="28" FontAttributes="Bold" TextColor="White" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border BackgroundColor="#172235" StrokeThickness="0" StrokeShape="RoundRectangle 22" Padding="18">
+                    <VerticalStackLayout>
+                        <Label Text="Devoluciones" TextColor="#A9B7CC" />
+                        <Label Text="{Binding TotalDevoluciones}" FontSize="28" FontAttributes="Bold" TextColor="White" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border BackgroundColor="#172235" StrokeThickness="0" StrokeShape="RoundRectangle 22" Padding="18">
+                    <VerticalStackLayout>
+                        <Label Text="Clientes" TextColor="#A9B7CC" />
+                        <Label Text="{Binding TotalClientes}" FontSize="28" FontAttributes="Bold" TextColor="White" />
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
 
             <Border BackgroundColor="#0F766E" StrokeThickness="0" StrokeShape="RoundRectangle 18" Padding="14">
-                <Label Text="{Binding Mensaje}" FontAttributes="Bold" />
+                <Label Text="{Binding Mensaje}" FontAttributes="Bold" TextColor="White" />
             </Border>
 
-            <Grid ColumnDefinitions="*,*" ColumnSpacing="18">
-                <Border BackgroundColor="#172235" StrokeThickness="0" StrokeShape="RoundRectangle 24" Padding="18">
-                    <VerticalStackLayout Spacing="14">
-                        <Label Text="Registrar producto nuevo" FontSize="22" FontAttributes="Bold" />
-                        <Label Text="Usa esta sección solo cuando el producto no existe todavía." TextColor="#A9B7CC" />
-                        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="10">
-                            <Entry Placeholder="Código" Text="{Binding ProductoCodigo}" />
-                            <Entry Grid.Column="1" Placeholder="Nombre" Text="{Binding ProductoNombre}" />
-                            <Entry Grid.Row="1" Placeholder="Categoría" Text="{Binding ProductoCategoria}" />
-                            <Entry Grid.Row="1" Grid.Column="1" Placeholder="Talla" Text="{Binding ProductoTalla}" />
-                            <Entry Grid.Row="2" Placeholder="Color" Text="{Binding ProductoColor}" />
-                            <Entry Grid.Row="2" Grid.Column="1" Placeholder="Precio" Keyboard="Numeric" Text="{Binding ProductoPrecio}" />
-                            <Entry Grid.Row="3" Placeholder="Stock inicial" Keyboard="Numeric" Text="{Binding ProductoStock}" />
-                            <Button Grid.Row="3" Grid.Column="1" Text="Registrar producto" Command="{Binding AgregarProductoCommand}" />
-                        </Grid>
-
-                        <BoxView HeightRequest="1" Color="#2C3A50" Margin="0,6" />
-
-                        <Label Text="Agregar stock a producto existente" FontSize="22" FontAttributes="Bold" />
-                        <Label Text="Selecciona un producto ya registrado y suma la cantidad indicada." TextColor="#A9B7CC" />
-                        <Grid ColumnDefinitions="2*,*,Auto" ColumnSpacing="10">
-                            <Picker Title="Producto" ItemsSource="{Binding Productos}" ItemDisplayBinding="{Binding Nombre}" SelectedItem="{Binding ProductoStockSeleccionado}" />
-                            <Entry Grid.Column="1" Placeholder="Cantidad" Keyboard="Numeric" Text="{Binding StockCantidad}" />
-                            <Button Grid.Column="2" Text="Agregar stock" Command="{Binding AgregarStockCommand}" />
-                        </Grid>
-                    </VerticalStackLayout>
-                </Border>
-
-                <Border Grid.Column="1" BackgroundColor="#172235" StrokeThickness="0" StrokeShape="RoundRectangle 24" Padding="18">
+            <Border BackgroundColor="#172235" StrokeThickness="0" StrokeShape="RoundRectangle 24" Padding="18">
+                <VerticalStackLayout Spacing="14">
+                    <Label Text="Registrar producto nuevo" FontSize="22" FontAttributes="Bold" TextColor="White" />
+                    <Label Text="Usa esta sección solo cuando el producto no existe todavía." TextColor="#A9B7CC" />
                     <VerticalStackLayout Spacing="10">
-                        <Label Text="Inventario disponible" FontSize="22" FontAttributes="Bold" />
-                        <CollectionView ItemsSource="{Binding Productos}" HeightRequest="360" SelectionMode="None">
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <Border BackgroundColor="#20304A" StrokeThickness="0" StrokeShape="RoundRectangle 16" Padding="12" Margin="0,0,0,8">
-                                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto">
-                                            <Label Text="{Binding Nombre}" FontAttributes="Bold" FontSize="16" />
-                                            <Label Grid.Column="1" Text="{Binding PrecioTexto}" TextColor="#35D0BA" FontAttributes="Bold" />
-                                            <Label Grid.Row="1" Text="{Binding Resumen}" TextColor="#A9B7CC" />
-                                            <Label Grid.Row="2" Text="{Binding StockTexto}" TextColor="White" />
-                                        </Grid>
-                                    </Border>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
+                        <Entry Placeholder="Código" Text="{Binding ProductoCodigo}" />
+                        <Entry Placeholder="Nombre" Text="{Binding ProductoNombre}" />
+                        <Entry Placeholder="Categoría" Text="{Binding ProductoCategoria}" />
+                        <Entry Placeholder="Talla" Text="{Binding ProductoTalla}" />
+                        <Entry Placeholder="Color" Text="{Binding ProductoColor}" />
+                        <Entry Placeholder="Precio" Keyboard="Numeric" Text="{Binding ProductoPrecio}" />
+                        <Entry Placeholder="Stock inicial" Keyboard="Numeric" Text="{Binding ProductoStock}" />
+                        <Button Text="Registrar producto" Command="{Binding AgregarProductoCommand}" />
                     </VerticalStackLayout>
-                </Border>
-            </Grid>
 
-            <Grid ColumnDefinitions="*,*" ColumnSpacing="18">
-                <Border BackgroundColor="#172235" StrokeThickness="0" StrokeShape="RoundRectangle 24" Padding="18">
-                    <VerticalStackLayout Spacing="10">
-                        <Label Text="Registrar venta" FontSize="22" FontAttributes="Bold" />
-                        <Picker Title="Producto vendido" ItemsSource="{Binding Productos}" ItemDisplayBinding="{Binding Nombre}" SelectedItem="{Binding ProductoVentaSeleccionado}" />
-                        <Entry Placeholder="Cliente" Text="{Binding VentaCliente}" />
-                        <Entry Placeholder="Cantidad" Keyboard="Numeric" Text="{Binding VentaCantidad}" />
-                        <Button Text="Procesar venta y descontar stock" Command="{Binding RegistrarVentaCommand}" />
-                        <CollectionView ItemsSource="{Binding Ventas}" HeightRequest="170">
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <Border BackgroundColor="#20304A" StrokeThickness="0" StrokeShape="RoundRectangle 14" Padding="10" Margin="0,0,0,8">
-                                        <Grid ColumnDefinitions="*,Auto"><VerticalStackLayout><Label Text="{Binding Producto}" FontAttributes="Bold"/><Label Text="{Binding Resumen}" TextColor="#A9B7CC"/></VerticalStackLayout><Label Grid.Column="1" Text="{Binding TotalTexto}" TextColor="#35D0BA" FontAttributes="Bold"/></Grid>
-                                    </Border>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                    </VerticalStackLayout>
-                </Border>
+                    <BoxView HeightRequest="1" Color="#2C3A50" Margin="0,6" />
 
-                <Border Grid.Column="1" BackgroundColor="#172235" StrokeThickness="0" StrokeShape="RoundRectangle 24" Padding="18">
+                    <Label Text="Agregar stock a producto existente" FontSize="22" FontAttributes="Bold" TextColor="White" />
+                    <Label Text="Selecciona un producto ya registrado y suma la cantidad indicada." TextColor="#A9B7CC" />
                     <VerticalStackLayout Spacing="10">
-                        <Label Text="Gestión de devoluciones" FontSize="22" FontAttributes="Bold" />
-                        <Picker Title="Producto devuelto" ItemsSource="{Binding Productos}" ItemDisplayBinding="{Binding Nombre}" SelectedItem="{Binding ProductoDevolucionSeleccionado}" />
-                        <Entry Placeholder="Cliente" Text="{Binding DevolucionCliente}" />
-                        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto" ColumnSpacing="10">
-                            <Entry Placeholder="Cantidad" Keyboard="Numeric" Text="{Binding DevolucionCantidad}" />
-                            <Picker Grid.Column="1" Title="Proceso" ItemsSource="{Binding TiposDevolucion}" SelectedItem="{Binding TipoDevolucion}" />
-                        </Grid>
-                        <Entry Placeholder="Motivo" Text="{Binding DevolucionMotivo}" />
-                        <Button Text="Registrar devolución y ajustar stock" Command="{Binding RegistrarDevolucionCommand}" />
-                        <CollectionView ItemsSource="{Binding Devoluciones}" HeightRequest="130">
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <Border BackgroundColor="#20304A" StrokeThickness="0" StrokeShape="RoundRectangle 14" Padding="10" Margin="0,0,0,8"><VerticalStackLayout><Label Text="{Binding Producto}" FontAttributes="Bold"/><Label Text="{Binding Resumen}" TextColor="#A9B7CC"/></VerticalStackLayout></Border>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
+                        <Picker Title="Producto" ItemsSource="{Binding Productos}" ItemDisplayBinding="{Binding Nombre}" SelectedItem="{Binding ProductoStockSeleccionado}" />
+                        <Entry Placeholder="Cantidad" Keyboard="Numeric" Text="{Binding StockCantidad}" />
+                        <Button Text="Agregar stock" Command="{Binding AgregarStockCommand}" />
                     </VerticalStackLayout>
-                </Border>
-            </Grid>
+                </VerticalStackLayout>
+            </Border>
 
-            <Grid ColumnDefinitions="*,*" ColumnSpacing="18">
-                <Border BackgroundColor="#172235" StrokeThickness="0" StrokeShape="RoundRectangle 24" Padding="18">
-                    <VerticalStackLayout Spacing="10">
-                        <Label Text="Clientes" FontSize="22" FontAttributes="Bold" />
-                        <Label Text="RUT, nombre y email son obligatorios." TextColor="#A9B7CC" />
-                        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="10">
-                            <Entry Placeholder="RUT" Text="{Binding ClienteRut}" />
-                            <Entry Grid.Column="1" Placeholder="Nombre" Text="{Binding ClienteNombre}" />
-                            <Entry Grid.Row="1" Placeholder="Email" Text="{Binding ClienteEmail}" />
-                            <Entry Grid.Row="1" Grid.Column="1" Placeholder="Preferencias" Text="{Binding ClientePreferencia}" />
-                        </Grid>
-                        <Button Text="Agregar cliente" Command="{Binding AgregarClienteCommand}" />
-                        <CollectionView ItemsSource="{Binding Clientes}" HeightRequest="150"><CollectionView.ItemTemplate><DataTemplate><Border BackgroundColor="#20304A" StrokeThickness="0" StrokeShape="RoundRectangle 14" Padding="10" Margin="0,0,0,8"><VerticalStackLayout><Label Text="{Binding Nombre}" FontAttributes="Bold"/><Label Text="{Binding Resumen}" TextColor="#A9B7CC"/><Label Text="{Binding Preferencia}" TextColor="#35D0BA"/></VerticalStackLayout></Border></DataTemplate></CollectionView.ItemTemplate></CollectionView>
-                    </VerticalStackLayout>
-                </Border>
-                <Border Grid.Column="1" BackgroundColor="#172235" StrokeThickness="0" StrokeShape="RoundRectangle 24" Padding="18">
-                    <VerticalStackLayout Spacing="10">
-                        <Label Text="Seguimiento de pedidos" FontSize="22" FontAttributes="Bold" />
-                        <CollectionView ItemsSource="{Binding Pedidos}" HeightRequest="270"><CollectionView.ItemTemplate><DataTemplate><Border BackgroundColor="#20304A" StrokeThickness="0" StrokeShape="RoundRectangle 14" Padding="12" Margin="0,0,0,8"><Grid ColumnDefinitions="*,Auto"><VerticalStackLayout><Label Text="{Binding Numero}" FontAttributes="Bold"/><Label Text="{Binding Resumen}" TextColor="#A9B7CC"/></VerticalStackLayout><Label Grid.Column="1" Text="{Binding Estado}" TextColor="#35D0BA" FontAttributes="Bold"/></Grid></Border></DataTemplate></CollectionView.ItemTemplate></CollectionView>
-                    </VerticalStackLayout>
-                </Border>
-            </Grid>
+            <Border BackgroundColor="#172235" StrokeThickness="0" StrokeShape="RoundRectangle 24" Padding="18">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Inventario disponible" FontSize="22" FontAttributes="Bold" TextColor="White" />
+                    <CollectionView ItemsSource="{Binding Productos}" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BackgroundColor="#20304A" StrokeThickness="0" StrokeShape="RoundRectangle 16" Padding="12" Margin="0,0,0,8">
+                                    <VerticalStackLayout Spacing="4">
+                                        <Label Text="{Binding Nombre}" FontAttributes="Bold" FontSize="16" TextColor="White" />
+                                        <Label Text="{Binding PrecioTexto}" TextColor="#35D0BA" FontAttributes="Bold" />
+                                        <Label Text="{Binding Resumen}" TextColor="#A9B7CC" />
+                                        <Label Text="{Binding StockTexto}" TextColor="White" />
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border BackgroundColor="#172235" StrokeThickness="0" StrokeShape="RoundRectangle 24" Padding="18">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Registrar venta" FontSize="22" FontAttributes="Bold" TextColor="White" />
+                    <Picker Title="Producto vendido" ItemsSource="{Binding Productos}" ItemDisplayBinding="{Binding Nombre}" SelectedItem="{Binding ProductoVentaSeleccionado}" />
+                    <Entry Placeholder="Cliente" Text="{Binding VentaCliente}" />
+                    <Entry Placeholder="Cantidad" Keyboard="Numeric" Text="{Binding VentaCantidad}" />
+                    <Button Text="Procesar venta y descontar stock" Command="{Binding RegistrarVentaCommand}" />
+                    <CollectionView ItemsSource="{Binding Ventas}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BackgroundColor="#20304A" StrokeThickness="0" StrokeShape="RoundRectangle 14" Padding="10" Margin="0,0,0,8">
+                                    <VerticalStackLayout>
+                                        <Label Text="{Binding Producto}" FontAttributes="Bold" TextColor="White" />
+                                        <Label Text="{Binding Resumen}" TextColor="#A9B7CC" />
+                                        <Label Text="{Binding TotalTexto}" TextColor="#35D0BA" FontAttributes="Bold" />
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border BackgroundColor="#172235" StrokeThickness="0" StrokeShape="RoundRectangle 24" Padding="18">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Gestión de devoluciones" FontSize="22" FontAttributes="Bold" TextColor="White" />
+                    <Picker Title="Producto devuelto" ItemsSource="{Binding Productos}" ItemDisplayBinding="{Binding Nombre}" SelectedItem="{Binding ProductoDevolucionSeleccionado}" />
+                    <Entry Placeholder="Cliente" Text="{Binding DevolucionCliente}" />
+                    <Entry Placeholder="Cantidad" Keyboard="Numeric" Text="{Binding DevolucionCantidad}" />
+                    <Picker Title="Proceso" ItemsSource="{Binding TiposDevolucion}" SelectedItem="{Binding TipoDevolucion}" />
+                    <Entry Placeholder="Motivo" Text="{Binding DevolucionMotivo}" />
+                    <Button Text="Registrar devolución y ajustar stock" Command="{Binding RegistrarDevolucionCommand}" />
+                    <CollectionView ItemsSource="{Binding Devoluciones}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BackgroundColor="#20304A" StrokeThickness="0" StrokeShape="RoundRectangle 14" Padding="10" Margin="0,0,0,8">
+                                    <VerticalStackLayout>
+                                        <Label Text="{Binding Producto}" FontAttributes="Bold" TextColor="White" />
+                                        <Label Text="{Binding Resumen}" TextColor="#A9B7CC" />
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border BackgroundColor="#172235" StrokeThickness="0" StrokeShape="RoundRectangle 24" Padding="18">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Clientes" FontSize="22" FontAttributes="Bold" TextColor="White" />
+                    <Label Text="RUT, nombre y email son obligatorios." TextColor="#A9B7CC" />
+                    <Entry Placeholder="RUT" Text="{Binding ClienteRut}" />
+                    <Entry Placeholder="Nombre" Text="{Binding ClienteNombre}" />
+                    <Entry Placeholder="Email" Text="{Binding ClienteEmail}" />
+                    <Entry Placeholder="Preferencias" Text="{Binding ClientePreferencia}" />
+                    <Button Text="Agregar cliente" Command="{Binding AgregarClienteCommand}" />
+                    <CollectionView ItemsSource="{Binding Clientes}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BackgroundColor="#20304A" StrokeThickness="0" StrokeShape="RoundRectangle 14" Padding="10" Margin="0,0,0,8">
+                                    <VerticalStackLayout>
+                                        <Label Text="{Binding Nombre}" FontAttributes="Bold" TextColor="White" />
+                                        <Label Text="{Binding Resumen}" TextColor="#A9B7CC" />
+                                        <Label Text="{Binding Preferencia}" TextColor="#35D0BA" />
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border BackgroundColor="#172235" StrokeThickness="0" StrokeShape="RoundRectangle 24" Padding="18">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Seguimiento de pedidos" FontSize="22" FontAttributes="Bold" TextColor="White" />
+                    <CollectionView ItemsSource="{Binding Pedidos}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border BackgroundColor="#20304A" StrokeThickness="0" StrokeShape="RoundRectangle 14" Padding="12" Margin="0,0,0,8">
+                                    <VerticalStackLayout>
+                                        <Label Text="{Binding Numero}" FontAttributes="Bold" TextColor="White" />
+                                        <Label Text="{Binding Resumen}" TextColor="#A9B7CC" />
+                                        <Label Text="{Binding Estado}" TextColor="#35D0BA" FontAttributes="Bold" />
+                                    </VerticalStackLayout>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Border>
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
